@@ -1,0 +1,86 @@
+# This workflow will build and push a Docker container to an Azure Web App when a commit is pushed to your default branch.
+#eyJub2lzZUtleSI6eyJwcml2YXRlIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiOEYwOVJuYm5QVStGV21qV0VlQzFidVdWYlgzdHNoWnZjYUo2MU0rTVIzST0ifSwicHVibGljIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiQjN4VkFuL1g1NzZseE8ydmZKVVZCQWpsOVYwcXNZeGFzYW9nNkgvTzUwND0ifX0sInBhaXJpbmdFcGhlbWVyYWxLZXlQYWlyIjp7InByaXZhdGUiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOiJjUHJBMjR2dUl4d1FUSG4zcUlXZExVUFhoMnQ3em9ITGJjWWtRNnZvdjJvPSJ9LCJwdWJsaWMiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOiJBdENjN0Zmb2ZseTNxZ01SWFRSVzl5Wng2ek8xWDJlcmdkNU5INXl6eG1nPSJ9fSwic2lnbmVkSWRlbnRpdHlLZXkiOnsicHJpdmF0ZSI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6ImtLU3pwcmRTcGUxQ2U1aEZiZTExWDJuWUFlTGtCaGtibUNLMC9NampSMUU9In0sInB1YmxpYyI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6Ii95MCszejNOc0Flb2QvSzJVR1p1eDFyQzZncTVpMjJRSGk5cUlGTHFybnc9In19LCJzaWduZWRQcmVLZXkiOnsia2V5UGFpciI6eyJwcml2YXRlIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiS0llTE9CQkpnZEtPMlRrZ0lhSjlyUFMzK2VKd25mSFc1YUFHMW9LM2sybz0ifSwicHVibGljIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiVjFxaHVVbnp6ZXBJMTVqdXlXbzNTRGNDMk1SeXk5SGRQekNFVDBGajZTZz0ifX0sInNpZ25hdHVyZSI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6Inoyc05lYk5vWHRkOFZOanRSMk9XOEVwOHZYMlhGTGFSZUcwdmpxcVVOQTkrN3ozaTF4aERDZyt3QWJoVUNBYVlHSU1USVNEbkVXb0tXR2U1Q2FaT0NRPT0ifSwia2V5SWQiOjF9LCJyZWdpc3RyYXRpb25JZCI6MTE4LCJhZHZTZWNyZXRLZXkiOiI5cHVhays2MEVXTjNqLzc5WDZpVjJQdDlDS3NaazMyUmsxai9qWC9PYU5jPSIsInByb2Nlc3NlZEhpc3RvcnlNZXNzYWdlcyI6W10sIm5leHRQcmVLZXlJZCI6MzEsImZpcnN0VW51cGxvYWRlZFByZUtleUlkIjozMSwiYWNjb3VudFN5bmNDb3VudGVyIjowLCJhY2NvdW50U2V0dGluZ3MiOnsidW5hcmNoaXZlQ2hhdHMiOmZhbHNlfSwiZGV2aWNlSWQiOiJDLVZNOUhWZ1JFQ2hrLW1KdU5wUEZBIiwicGhvbmVJZCI6IjdlOTE3NmI4LWY5ZjQtNDlmZC1iMzE0LTQ4MTllYzFlN2Y4OCIsImlkZW50aXR5SWQiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOiIzOXhlWTd1cU5wMkg3WlZlL3A5bXliOFUwY1k9In0sInJlZ2lzdGVyZWQiOnRydWUsImJhY2t1cFRva2VuIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiN2F4aEk1RXEyZVRuckJWcTh2anZkNENrQTJBPSJ9LCJyZWdpc3RyYXRpb24iOnt9LCJwYWlyaW5nQ29kZSI6IjE1M0JMUFpKIiwibWUiOnsiaWQiOiIyNTQ3MDUzNzg1NzE6MTVAcy53aGF0c2FwcC5uZXQiLCJuYW1lIjoi8J2Vr/CdlobwnZaX8J2WkCDwnZaG8J2Wk/CdlozwnZaK8J2WkSJ9LCJhY2NvdW50Ijp7ImRldGFpbHMiOiJDTHZzNnFVREVNN3l4THdHR0FNZ0FDZ0EiLCJhY2NvdW50U2lnbmF0dXJlS2V5IjoiTit2aGdJQ043dzFSS2p4Z3BUbXY5S0N3YkdNNU1SeHFpTGRMcjUyL3pscz0iLCJhY2NvdW50U2lnbmF0dXJlIjoiSHNZWFdjMStTOE5qTjlURkh6Ukd1ZmVjV2x4QTRtQVplSnh5ZU9QU2x2dERickhRb0VZbENXNWo3SEFlb0J3RDBydEl0YmhJaG1vTUlvNjlBS1ZBRFE9PSIsImRldmljZVNpZ25hdHVyZSI6ImEyeUhBakk2V1BCZVJJSHFNbENpeFVueDhGY0hwbC90cWlnZEIwdzVXN1lsR25OSzc5cE5keS9vWWVleDMwSG11SFBYY3oyd1RpeFNVWm83ZTBmdURBPT0ifSwic2lnbmFsSWRlbnRpdGllcyI6W3siaWRlbnRpZmllciI6eyJuYW1lIjoiMjU0NzA1Mzc4NTcxOjE1QHMud2hhdHNhcHAubmV0IiwiZGV2aWNlSWQiOjB9LCJpZGVudGlmaWVyS2V5Ijp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiQlRmcjRZQ0FqZThOVVNvOFlLVTVyL1Nnc0d4ak9URWNhb2kzUzYrZHY4NWIifX1dLCJwbGF0Zm9ybSI6InNtYmEiLCJsYXN0QWNjb3VudFN5bmNUaW1lc3RhbXAiOjE3Mzc1NzA2NTMsIm15QXBwU3RhdGVLZXlJZCI6IkFBQUFBREw2In0=
+# This workflow assumes you have already created the target Azure App Service web app.
+# For instructions see https://docs.microsoft.com/en-us/azure/app-service/quickstart-custom-container?tabs=dotnet&pivots=container-linux
+#
+# To configure this workflow:
+#
+# 1. Download the Publish Profile for your Azure Web App. You can download this file from the Overview page of your Web App in the Azure Portal.
+#    For more information: https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel#generate-deployment-credentials
+#
+# 2. Create a secret in your repository named AZURE_WEBAPP_PUBLISH_PROFILE, paste the publish profile contents as the value of the secret.
+#    For instructions on obtaining the publish profile see: https://docs.microsoft.com/azure/app-service/deploy-github-actions#configure-the-github-secret
+#
+# 3. Create a GitHub Personal access token with "repo" and "read:packages" permissions.
+#
+# 4. Create three app settings on your Azure Web app:
+#       DOCKER_REGISTRY_SERVER_URL: Set this to "https://ghcr.io"
+#       DOCKER_REGISTRY_SERVER_USERNAME: Set this to the GitHub username or organization that owns the repository
+#       DOCKER_REGISTRY_SERVER_PASSWORD: Set this to the value of your PAT token from the previous step
+#
+# 5. Change the value for the AZURE_WEBAPP_NAME.
+#
+# For more information on GitHub Actions for Azure: https://github.com/Azure/Actions
+# For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
+
+name: Build and deploy a container to an Azure Web App
+
+env:
+  AZURE_WEBAPP_NAME: your-app-name  # set this to the name of your Azure Web App
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
+
+      - name: Log in to GitHub container registry
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Lowercase the repo name and username
+        run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
+      - name: Build and push container image to registry
+        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
+        with:
+          push: true
+          tags: ghcr.io/${{ env.REPO }}:${{ github.sha }}
+          file: ./Dockerfile
+
+  deploy:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Development'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Lowercase the repo name and username
+        run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: 'ghcr.io/${{ env.REPO }}:${{ github.sha }}'
